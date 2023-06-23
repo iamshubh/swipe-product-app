@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -59,6 +60,10 @@ class ProductListFragment : Fragment() {
         viewModel.uiResponse.observe(viewLifecycleOwner) {
             it.render()
         }
+
+        viewModel.filterResponse.observe(viewLifecycleOwner) {
+            renderProducts(it)
+        }
     }
 
     private fun listeners() {
@@ -68,6 +73,17 @@ class ProductListFragment : Fragment() {
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addFragment)
+        }
+
+        binding.searchButton.setOnClickListener {
+            val query = binding.searchText.text
+            if (query.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Please enter search query", Toast.LENGTH_SHORT)
+                    .show()
+                viewModel.searchProducts("")
+            } else {
+                viewModel.searchProducts(query.toString())
+            }
         }
     }
 
@@ -92,7 +108,7 @@ class ProductListFragment : Fragment() {
 
     private fun showEmptyView() {
         binding.containerProducts.isVisible = false
-        binding.containerError.isVisible = true
+        binding.emptyView.isVisible = true
     }
 
     private fun showLoader() {
@@ -105,6 +121,7 @@ class ProductListFragment : Fragment() {
     }
 
     private fun renderProducts(items: List<ProductItem>) {
+        binding.emptyView.isVisible = false
         binding.containerProducts.isVisible = true
         binding.rvProducts.apply {
             adapter = RecyclerViewProductAdapter(items)

@@ -1,5 +1,6 @@
 package com.geswipe.app.ui
 
+import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,6 +25,9 @@ class ProductListViewModel @Inject constructor(private val repository: ProductRe
     private var _uiResponse = MutableLiveData<ProductsUiState>()
     val uiResponse: LiveData<ProductsUiState> = _uiResponse
 
+    private var _filterResponse = MutableLiveData<List<ProductItem>>()
+    val filterResponse : LiveData<List<ProductItem>> = _filterResponse
+
     fun loadProducts() {
         viewModelScope.launch {
             _uiResponse.postValue(ProductsUiState.Loading)
@@ -37,8 +41,26 @@ class ProductListViewModel @Inject constructor(private val repository: ProductRe
             is ApiResponse.Success -> {
                 _uiResponse.postValue(ProductsUiState.Success(response.data))
             }
+
             else -> {
                 _uiResponse.postValue(ProductsUiState.Error)
+            }
+        }
+    }
+
+    fun searchProducts(query: String) {
+        if (uiResponse.value is ProductsUiState.Success) {
+            val items = (uiResponse.value as ProductsUiState.Success).data
+            if (query.isBlank()) {
+                _filterResponse.postValue(items)
+            } else {
+                val filteredItem = items.filter {
+                    it.productName?.contains(query) == true ||
+                            it.productType?.contains(query) == true ||
+                            it.price?.toString()?.contains(query) == true ||
+                            it.tax?.toString()?.contains(query) == true
+                }
+                _filterResponse.postValue(filteredItem)
             }
         }
     }
