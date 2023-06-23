@@ -2,13 +2,13 @@ package com.geswipe.app.data.source
 
 import com.geswipe.app.data.model.AddProductResponse
 import com.geswipe.app.data.model.ApiResponse
-import com.geswipe.app.data.model.ProductResponseItem
+import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.data.source.networking.ApiService
 import retrofit2.HttpException
 import javax.inject.Inject
 
 class ProductDataSourceImpl @Inject constructor(val service: ApiService) : ProductDataSource {
-    override suspend fun fetchProducts(): ApiResponse<List<ProductResponseItem>> {
+    override suspend fun fetchProducts(): ApiResponse<List<ProductItem>> {
         return try {
             val response = service.loadAll()
             if (response.isSuccessful && response.body() != null) {
@@ -26,7 +26,7 @@ class ProductDataSourceImpl @Inject constructor(val service: ApiService) : Produ
         }
     }
 
-    override suspend fun create(item: ProductResponseItem): ApiResponse<AddProductResponse> {
+    override suspend fun create(item: ProductItem): ApiResponse<AddProductResponse> {
         return try {
             val response = service.create(item)
             if (response.isSuccessful && response.body() != null) {

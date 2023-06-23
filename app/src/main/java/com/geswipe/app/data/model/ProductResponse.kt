@@ -17,11 +17,11 @@ sealed class ApiResponse<out T : Any> {
 data class ProductResponse(
 
     @field:SerializedName("ProductResponse")
-    val items: List<ProductResponseItem>
+    val items: List<ProductItem>
 ) : Parcelable
 
 @Parcelize
-data class ProductResponseItem(
+data class ProductItem(
 
     @field:SerializedName("image")
     val image: String? = null,

@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.geswipe.app.data.model.ProductResponse
-import com.geswipe.app.data.model.ProductResponseItem
+import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.databinding.FragmentProductListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -99,7 +98,7 @@ class ProductListFragment : Fragment() {
         binding.loaderProducts.isVisible = false
     }
 
-    private fun renderProducts(items: List<ProductResponseItem>) {
+    private fun renderProducts(items: List<ProductItem>) {
         binding.containerProducts.isVisible = true
         binding.rvProducts.apply {
             adapter = RecyclerViewProductAdapter(items)

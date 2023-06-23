@@ -1,27 +1,23 @@
 package com.geswipe.app.ui
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.geswipe.app.R
-import com.geswipe.app.data.model.ProductResponseItem
+import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.databinding.ItemSingleProductBinding
 
 
-class RecyclerViewProductAdapter(private val items: List<ProductResponseItem>) :
+class RecyclerViewProductAdapter(private val items: List<ProductItem>) :
     RecyclerView.Adapter<RecyclerViewProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(val binding: ItemSingleProductBinding) :
         ViewHolder(binding.root) {
-        fun bind(data: ProductResponseItem) {
+        fun bind(data: ProductItem) {
             binding.apply {
                 tvName.text = data.productName
                 tvCategory.text = data.productType

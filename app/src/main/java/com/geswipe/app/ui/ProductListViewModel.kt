@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.geswipe.app.data.model.ApiResponse
-import com.geswipe.app.data.model.ProductResponse
-import com.geswipe.app.data.model.ProductResponseItem
+import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.data.source.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,7 +17,7 @@ class ProductListViewModel @Inject constructor(private val repository: ProductRe
 
     sealed class ProductsUiState {
         object Loading : ProductsUiState()
-        data class Success(val data: List<ProductResponseItem>) : ProductsUiState()
+        data class Success(val data: List<ProductItem>) : ProductsUiState()
         object Error : ProductsUiState()
     }
 
@@ -33,7 +32,7 @@ class ProductListViewModel @Inject constructor(private val repository: ProductRe
         }
     }
 
-    private fun handleResponse(response: ApiResponse<List<ProductResponseItem>>) {
+    private fun handleResponse(response: ApiResponse<List<ProductItem>>) {
         when (response) {
             is ApiResponse.Success -> {
                 _uiResponse.postValue(ProductsUiState.Success(response.data))

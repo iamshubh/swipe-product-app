@@ -1,13 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp"
     tools:context=".ui.AddProdFragment">
 
-    <TextView
+    <EditText
+        android:id="@+id/nameText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="ex: Electric kettle"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/typeText"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/typeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="ex: electrical "
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/nameText"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <EditText
+        android:id="@+id/priceText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Price eg: 200"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/typeText"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <EditText
+        android:id="@+id/taxText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="enter tax eg: 12"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/priceText"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <EditText
+        android:id="@+id/imageText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="enter image url"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/taxText"
+        tools:layout_editor_absoluteX="1dp" />
+
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
