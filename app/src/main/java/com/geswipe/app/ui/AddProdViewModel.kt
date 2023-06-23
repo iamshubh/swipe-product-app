@@ -9,6 +9,7 @@ import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.data.source.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -22,12 +23,20 @@ class AddProdViewModel @Inject constructor(private val repo: ProductRepository) 
     private var _validation = MutableLiveData<String>()
     val validation: LiveData<String> = _validation
 
-    fun addProduct(name: String?, type: String?, price: String?, tax: String?, image: String?) {
+    fun addProduct(
+        name: String?,
+        type: String?,
+        price: String?,
+        tax: String?,
+        image: String? = ""
+    ) {
         viewModelScope.launch {
+            var validation = true
             withContext(Dispatchers.Default) {
-                if (!validate(name, type, price, tax)) {
-                    return@withContext
-                }
+                validation = validate(name, type, price, tax)
+            }
+            if (!validation) {
+                return@launch
             }
             val item = ProductItem(image, type, price?.toFloat(), tax?.toFloat(), name)
             val response = repo.create(item)
@@ -53,7 +62,14 @@ class AddProdViewModel @Inject constructor(private val repo: ProductRepository) 
             _validation.postValue("Please enter price")
             false
         } else {
-            true
+            val check1 = price.toFloatOrNull()
+            val check2 = tax.toFloatOrNull()
+            if (check1 == null || check2 == null) {
+                _validation.postValue("Please enter valid price/tax")
+                false
+            } else {
+                true
+            }
         }
     }
 }

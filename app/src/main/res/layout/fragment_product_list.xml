@@ -88,4 +88,17 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Add Product"
+        android:layout_margin="16dp" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

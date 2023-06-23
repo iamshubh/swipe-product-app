@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.geswipe.app.R
 import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.databinding.FragmentProductListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,6 +64,10 @@ class ProductListFragment : Fragment() {
     private fun listeners() {
         binding.buttonRetry.setOnClickListener {
             viewModel.loadProducts()
+        }
+
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_addFragment)
         }
     }
 
