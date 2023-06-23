@@ -15,6 +15,9 @@ import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.databinding.FragmentProductListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This screen deals with listing of product
+ */
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
 

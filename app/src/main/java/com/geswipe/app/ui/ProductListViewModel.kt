@@ -12,6 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Handles business logic for product list fragment
+ */
 @HiltViewModel
 class ProductListViewModel @Inject constructor(private val repository: ProductRepository) :
     ViewModel() {

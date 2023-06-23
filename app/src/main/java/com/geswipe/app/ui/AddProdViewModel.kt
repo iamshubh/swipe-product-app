@@ -9,11 +9,16 @@ import com.geswipe.app.data.model.ProductItem
 import com.geswipe.app.data.source.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+
+/**
+ * /**
+ * Handles business logic for add product fragment
+*/
+ */
 @HiltViewModel
 class AddProdViewModel @Inject constructor(private val repo: ProductRepository) : ViewModel() {
 
